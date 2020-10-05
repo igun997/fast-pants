@@ -1,74 +1,60 @@
 <script>
-import {isLogin} from  "../Common/Store.js";
-import { navigate } from "svelte-routing";
-import Icon from "fa-svelte";
-import { faHome,faNewspaper,faVideo,faBell,faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
-let login = 0;
+    import {toast} from "svelte-toastify";
 
-const unsubscribe = isLogin.subscribe(value => {
-    console.log(value)
-    login = value;
-});
-isLogin.update(n => {
-    const localLogin = parseInt(localStorage.getItem("isLogin"));
-    if (localLogin === 1){
-        n = localLogin;
+    let human = "Buddy";
+    const valid = localStorage.getItem("jwt");
+    if (valid === null){
+        loginOwner();
     }else {
-         n = 0;
+
     }
-    return n;
-});
-function logOut() {
-    isLogin.update(n => n - 1);
-    localStorage.setItem("isLogin",0);
-    localStorage.setItem("fullIdentity",null);
-    navigate("/",{replace:true})
-}
-console.log(login)
+    async function loginOwner() {
+        const gooks = await  fetch(ps.env.endpoint+"api/auth/login",{
+            method:"POST",
+            headers: {
+                "Content-Type":"application/json"
+            },
+            body : JSON.stringify({
+                username:((ps.env.default_user).split(":"))[0],
+                password:((ps.env.default_user).split(":"))[1],
+            })
+        })
+        const response = await gooks.json();
+        if (response.access_token !== undefined){
+            localStorage.setItem("jwt",response.access_token);
+            toast.info("Your Data Will be Loaded ..");
+        }else {
+            toast.info("Owh Snap It Troubled");
+        }
+    }
+    async function findMyAccount() {
+
+    }
 </script>
-<style>
-    .bblr-color {
-        background-color: #4a4e4d;
-    }
-    .icon-size {
-        width: 50px;
-        height: 50px;
-    }
-</style>
-<nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bblr-color">
-    {#if (login === 0)}
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="/">Login</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/register">Register</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse w-100 order-1 order-lg-0" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="https://pridenjoyco.id"> Back To Store</a>
             </li>
         </ul>
     </div>
-    {:else}
-    <a class="navbar-toggler" href="/home"  type="button"  >
-        <Icon icon="{faHome}" />
-    </a>
+    <div class="d-flex w-100 order-0">
+        <div class="w-100">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <a class="navbar-brand text-center w-100" href="#">FAST PANTS</a>
+        <span class="w-100"></span>
+    </div>
+    <span class="w-100"></span>
 
-    <a class="navbar-toggler " href="/artikel" type="button"  >
-        <Icon icon="{faNewspaper}" />
-    </a>
-
-    <a class="navbar-toggler " href="/video"  type="button"  >
-        <Icon icon="{faVideo}" />
-    </a>
-
-    <a class="navbar-toggler " href="/alarm"  type="button"  >
-        <Icon icon="{faBell}" />
-    </a>
-    <button class="navbar-toggler " on:click={logOut} type="button"  >
-        <Icon icon="{faSignOutAlt}" />
-    </button>
-
-    {/if}
+    <div class="collapse navbar-collapse float-right" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="https://pridenjoyco.id/my-account/"> Hi , human</a>
+            </li>
+        </ul>
+    </div>
 </nav>

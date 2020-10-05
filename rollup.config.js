@@ -43,7 +43,10 @@ export default {
 			// 2 level deep object should be stringify
 			ps: JSON.stringify({
 				env: {
-					endpoint: "https://api.maugini.in/",
+					endpoint: "https://fastpants.pridenjoyco.id/backend/",
+					wp: "https://pridenjoyco.id/api/",
+					default_user:"igun997:igun97",
+					expivi_jwt:"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjVlZTA4Mjk1MTkxMTI4ODA0YzYzOGQ1MjdmNTY5NmMwZWU3YzQ4OThkYmY5YmUzMWZkZDkzY2IwZGMzMWFjNGI0MzM1MTM4YmI1YzZjNGI3In0.eyJhdWQiOiIxIiwianRpIjoiNWVlMDgyOTUxOTExMjg4MDRjNjM4ZDUyN2Y1Njk2YzBlZTdjNDg5OGRiZjliZTMxZmRkOTNjYjBkYzMxYWM0YjQzMzUxMzhiYjVjNmM0YjciLCJpYXQiOjE2MDE4OTE2ODksIm5iZiI6MTYwMTg5MTY4OSwiZXhwIjoxOTE3NDI0NDg5LCJzdWIiOiIxNTA2Iiwic2NvcGVzIjpbXX0.jq5piM2198cU8muZJfV1RCdaLcYZsSYxjmf70sHhPjJ_S9SEnLrsRNa3m-XjRK8aGbWjZ7jkUuTazHuDSokH4A3nFblmooVdmJWRotWt3yVtvBwboK1HLB7mT3DoiUM9kAw5ZHM0RFSHSrarp_y9r6W1NbiZzMzc2Qe2lrUc-DWooWo6oUxdoZcOtScUWZ5a_nfULVgb4B58xsjecgpgPlcwA78b3ecWI0967au68acE0lMbzNvlJMoAmV9zdlzu8KcX9Wn7dZsLy5D5h52OP5Foqerd-e05SH-zpQS0pOV1pBno_k1LPDY5meiwfdJ8isqHC7dhmqb4l5r243TtSYGEJUKJyFtzGtHQQge43hIKcRxhGnhoYnx27svpZ4NVyVGPdw4g0_4BGDvoBqoQqGEu2o_8tjLIb5YuECrCyNo0Po-iK2JInavXahA2QDnDc7zlzq-3eoRY2JLSl-jUBDv5fFpzq71sDaxlxe12VbPiFBfT1L-ZXgUEztMvKMOSdjSMAx5ozjVLBcUN9AbbPxo_1dOZUtU08YcXC8SGNMhybxkHXS5d45RcbPNBFgni4cOMnnr9CHIF3uzuaPbl7U0NXriL--3am_HyhUcfMcX4VCJzdxXLLLsNE9KC2bI1zflcM5_GOf4Go3uNUZKiPWdaZVGAD236tAOf4Ife0Pw"
 				}
 			}),
 		}),
