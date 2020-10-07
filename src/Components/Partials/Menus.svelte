@@ -1,8 +1,15 @@
 <script>
     import {toast} from "svelte-toastify";
-
-    let human = "Buddy";
+    import { isLogin }   from  "../Common/Store"
+    let isLogged = false;
+    let loggedName = null;
     const valid = localStorage.getItem("jwt");
+    let fullID = localStorage.getItem("fullID");
+    if (fullID){
+        fullID = JSON.parse(fullID);
+        isLogged = true;
+        loggedName = fullID.user.displayname
+    }
     if (valid === null){
         loginOwner();
     }else {
@@ -30,12 +37,48 @@
     async function findMyAccount() {
 
     }
+    isLogin.subscribe(v => {
+        if (v === 1){
+            loggedName = localStorage.getItem("loggedName");
+            isLogged = true;
+        }else if(v === 0){
+
+            const jwt = localStorage.getItem("jwt");
+            if (jwt === null){
+                isLogged = 0;
+            }else{
+                async function f() {
+                    const gooks = await fetch(ps.env.endpoint+"api/auth/me",{
+                        method:"POST",
+                        headers: {
+                            "Content-Type":"application/json",
+                            "Accept":"application/json",
+                            "Authorize":"Bearer "+jwt
+                        }
+                    })
+                    const response = await gooks.json();
+                    if (response.id !== undefined){
+                        isLogged = true;
+                    }else{
+                        loginOwner();
+                    }
+                }
+                f();
+            }
+        }
+    })
+    async function logout() {
+        localStorage.clear();
+        location.reload();
+    }
 </script>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="collapse navbar-collapse w-100 order-1 order-lg-0" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="https://pridenjoyco.id"> Back To Store</a>
+                {#if isLogged}
+                    <a class="nav-link" on:click={logout} href="#">Logout</a>
+                {/if}
             </li>
         </ul>
     </div>
@@ -53,7 +96,11 @@
     <div class="collapse navbar-collapse float-right" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="https://pridenjoyco.id/my-account/"> Hi , human</a>
+                {#if !isLogged}
+                <a class="nav-link" href="/">Login</a>
+                {:else}
+                <a class="nav-link" href="#">{loggedName}</a>
+                {/if}
             </li>
         </ul>
     </div>
