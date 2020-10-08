@@ -88,7 +88,9 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
-        <a class="navbar-brand text-center w-100" href="#">FAST PANTS</a>
+        <a class="navbar-brand text-center w-100" href="#">
+            <img src="/favicon.png" class="img-fluid" style="width: auto;height: 80px">
+        </a>
         <span class="w-100"></span>
     </div>
     <span class="w-100"></span>

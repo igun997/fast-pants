@@ -156,9 +156,6 @@
             <div class="form-group">
                 <button type="button" class="btnSubmit" on:click={login} >Login</button>
             </div>
-            <div class="form-group">
-                <a href="#" class="ForgetPwd" value="Login">Daftar</a>
-            </div>
         </form>
     </div>
 </div>
@@ -167,7 +164,7 @@
         <img src="{img}" alt="">
     </div>
     <div class="col-12 gap">
-    <iframe id="inner" allowfullscreen src="https://pridenjoyco.id/pants.php?key={ps.env.expivi_jwt}&jwt={localStorage.getItem('jwt')}&other={decodedId}" frameborder="0">
+    <iframe id="inner" title="Fast Pants" allowfullscreen src="https://pridenjoyco.id/pants.php?key={ps.env.expivi_jwt}&jwt={localStorage.getItem('jwt')}&other={decodedId}" frameborder="0">
     </iframe>
     </div>
 {/if}
